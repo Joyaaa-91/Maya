@@ -25,7 +25,7 @@ class Maya extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
       ),
-      home: const Logo(),
+      home: const GlobalFeaturesPage(),
     );
   }
 }

@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:untitled/LoginPage.dart';
 import 'package:untitled/PregnancyGuideScreen.dart';
-import 'MentalHealthSupportScreen.dart';
-import 'MentalHeathSupportScreen.dart';
+import 'AnonymousCrimereporting.dart';
+import 'SafetytipScreen.dart';
+import 'SelfdefensetutorialScreen.dart';
 import 'ShakeFeaturePage.dart';
+import 'AnonymousCrimeReportPage.dart';
+import 'ReportListPage.dart'; // New import for the reports page
+
+// New imports for the features you added
+import 'safety_tips_screen.dart';
+import 'self_defense_tutorial_screen.dart';
 
 // --- Theme Definitions ---
 class AppThemes {
@@ -167,7 +174,8 @@ class FeatureItem {
   FeatureItem({required this.icon, required this.name, required this.onTap});
 }
 
-List<FeatureItem> globalFeatures = [
+// Global features now need a context to navigate
+List<FeatureItem> globalFeatures(BuildContext context) => [
   FeatureItem(
     icon: Icons.route_outlined,
     name: 'Select Best Route',
@@ -181,7 +189,12 @@ List<FeatureItem> globalFeatures = [
   FeatureItem(
     icon: Icons.sports_kabaddi_outlined,
     name: 'Self Defense Tutorial',
-    onTap: () => print('Self Defense tapped'),
+    onTap: () { // Corrected navigation logic
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SelfDefenseTutorialScreen()),
+      );
+    },
   ),
   FeatureItem(
     icon: Icons.shield_outlined,
@@ -201,18 +214,40 @@ List<FeatureItem> globalFeatures = [
   FeatureItem(
     icon: Icons.report_problem_outlined,
     name: 'Anonymous Crime Reporting',
-    onTap: () => print('Anonymous Crime Reporting tapped'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AnonymousCrimeReportPage(),
+        ),
+      );
+    },
+  ),
+  FeatureItem(
+    icon: Icons.list_alt_outlined,
+    name: 'View Recent Reports',
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ReportListPage(),
+        ),
+      );
+    },
   ),
   FeatureItem(
     icon: Icons.lightbulb_outline,
     name: 'Safety Tips',
-    onTap: () => print('Safety Tips tapped'),
+    onTap: () { // Corrected navigation logic
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SafetyTipsScreen()),
+      );
+    },
   ),
 ];
 
-// --- ADD: Mother Mode Feature Data ---
-// In GlobalFeaturesPage.dart
-
+// Mother mode features also need a context
 List<FeatureItem> motherModeFeatures(BuildContext context) => [
   FeatureItem(
     icon: Icons.restaurant_menu_outlined,
@@ -228,43 +263,31 @@ List<FeatureItem> motherModeFeatures(BuildContext context) => [
   ),
   FeatureItem(
     icon: Icons.calendar_today_outlined,
-    name: 'Doctor Appointments',
-    onTap: () => print('Doctor Appointments tapped'),
+    name: 'Doctor Appointment Reminders',
+    onTap: () => print('Appointments tapped'),
   ),
   FeatureItem(
     icon: Icons.local_hospital_outlined,
     name: 'Maternity Emergency',
     onTap: () => print('Maternity Emergency tapped'),
   ),
-
   FeatureItem(
     icon: Icons.self_improvement_outlined,
-    name: 'Mental Health Support',
-    onTap: () {
-      print('Mental Health Support tapped');
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MentalHealthSupportScreen(),
-        ),
-      );
-    },
+    name: 'Mental Health',
+    onTap: () => print('Mental Health tapped'),
   ),
-
   FeatureItem(
     icon: Icons.track_changes_outlined,
-    name: 'Fetal Movement Tracker',
+    name: 'Fetal Movement & Contraction Tracker',
     onTap: () => print('Tracker tapped'),
   ),
-
 ];
 
-
+// --- User Mode ---
 enum UserMode { normal, mother }
 
-
+// --- GlobalFeaturesPage ---
 class GlobalFeaturesPage extends StatefulWidget {
-
   final String userName;
 
   const GlobalFeaturesPage({super.key, this.userName = "User"});
@@ -279,7 +302,6 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
   ThemeData _currentTheme = AppThemes.morningTheme;
   String _greeting = "Good Morning";
 
-
   StreamSubscription? _accelerometerSubscription;
   double _lastX = 0.0, _lastY = 0.0, _lastZ = 0.0;
   DateTime? _lastShakeTime;
@@ -292,7 +314,6 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
     _updateThemeAndGreeting();
     _startListeningToShake();
   }
-
 
   void _startListeningToShake() {
     _accelerometerSubscription = accelerometerEventStream(
@@ -330,7 +351,6 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
     );
   }
 
-
   void _triggerSOS() {
     if (!mounted) return;
     Navigator.push(
@@ -341,11 +361,9 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
 
   @override
   void dispose() {
-    _accelerometerSubscription
-        ?.cancel();
+    _accelerometerSubscription?.cancel();
     super.dispose();
   }
-
 
   void _updateThemeAndGreeting() {
     final hour = DateTime.now().hour;
@@ -371,7 +389,7 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
           print("Mode changed to: $_selectedMode");
         });
       }
-      Navigator.pop(context); // Close the drawer
+      Navigator.pop(context);
     }
   }
 
@@ -381,8 +399,8 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
     print("Logout tapped");
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -391,9 +409,7 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text(
-            _selectedMode == UserMode.mother
-                ? "Mother Mode"
-                : "Global Features",
+            _selectedMode == UserMode.mother ? "Mother Mode" : "Global Features",
           ),
           leading: IconButton(
             icon: const Icon(Icons.menu),
@@ -408,14 +424,14 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
 
   Drawer _buildDrawer() {
     return Drawer(
-      backgroundColor: Color(0xFFB5293B),
+      backgroundColor: const Color(0xFFB5293B),
       child: Builder(
         builder: (drawerContext) {
           final theme = Theme.of(drawerContext);
           return ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              DrawerHeader(
+              const DrawerHeader(
                 decoration: BoxDecoration(color: Color(0xFFB5293B)),
                 child: Text(
                   'App Menu',
@@ -481,11 +497,10 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
   }
 
   Widget _buildBody() {
-    // Determine which list of features to show
-    final featuresToShow =
-    _selectedMode == UserMode.mother
+    final featuresToShow = _selectedMode == UserMode.mother
         ? motherModeFeatures(context)
-        : globalFeatures;
+        : globalFeatures(context);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -513,14 +528,14 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
     );
   }
 
-  Widget _buildFeatureCard(FeatureItem feature) {
+  Widget _buildFeatureCard(FeatureItem feature, {VoidCallback? onTap}) {
     final cardGradient = LinearGradient(
       colors: [Colors.pink[300]!, Colors.pink[100]!],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     );
-    final cardTextStyle = TextStyle(
-      color: Colors.grey[800],
+    const cardTextStyle = TextStyle(
+      color: Color.fromARGB(255, 14, 14, 14),
       fontWeight: FontWeight.bold,
       fontSize: 15,
     );
@@ -528,12 +543,10 @@ class _GlobalFeaturesPageState extends State<GlobalFeaturesPage> {
 
     return Card(
       elevation: Theme.of(context).cardTheme.elevation ?? 2,
-      shape:
-      Theme.of(context).cardTheme.shape ??
+      shape: Theme.of(context).cardTheme.shape ??
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
-        // Use the provided onTap, or the feature's default
-        onTap: feature.onTap,
+        onTap: onTap ?? feature.onTap,
         borderRadius: BorderRadius.circular(12),
         child: Container(
           decoration: BoxDecoration(
