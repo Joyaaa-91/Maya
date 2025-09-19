@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "26449185283",
+    "project_id": "maya-joya91namira79",
+    "storage_bucket": "maya-joya91namira79.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26449185283:android:4efd79462360310a17dc36",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf0na3nw4bMBJJLNF7vXFcZk1zRQC2WzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
