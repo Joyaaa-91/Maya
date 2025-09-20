@@ -30,7 +30,6 @@ class MentalHealthSupportScreen extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -47,7 +46,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Text(
               "Your well-being matters. Explore resources to support your mental health during pregnancy.",
-              style: theme.textTheme.titleLarge?.copyWith(color: theme.pink),
+              style: theme.textTheme.titleLarge?.copyWith(color: theme.primaryColor),
               textAlign: TextAlign.center,
             ),
           ),
@@ -59,8 +58,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Daily check-ins & mood trends",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Mood Tracking");
-
+              // TODO: Add navigation to Mood Tracking page
             },
           ),
           _buildFeatureListItem(
@@ -70,8 +68,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Self-evaluation questionnaires (e.g., EPDS)",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Mental Health Assessments");
-
+              // TODO: Add navigation to Mental Health Assessments page
             },
           ),
           _buildFeatureListItem(
@@ -81,8 +78,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Exercises for pregnancy stress relief",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Guided Meditation");
-
+              // TODO: Add navigation to Guided Meditation page
             },
           ),
           _buildFeatureListItem(
@@ -92,8 +88,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Stress reduction, sleep improvement, journaling",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Coping Strategies");
-
+              // TODO: Add navigation to Coping Strategies page
             },
           ),
           _buildFeatureListItem(
@@ -103,8 +98,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Articles, videos, and podcasts",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Educational Resources");
-
+              // TODO: Add navigation to Educational Resources page
             },
           ),
           _buildFeatureListItem(
@@ -114,8 +108,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Forums and peer support groups",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Community Support");
-
+              // TODO: Add navigation to Community Support page
             },
           ),
           _buildFeatureListItem(
@@ -125,8 +118,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Directory, teleconsultation, crisis links",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Professional Support Access");
-
+              // TODO: Add navigation to Professional Support Access page
             },
           ),
           _buildFeatureListItem(
@@ -136,8 +128,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Nudges for well-being activities",
             iconColor: featureIconColor,
             onTap: () {
-              print("Configure Reminders & Check-ins");
-
+              // TODO: Add navigation to Reminders & Check-ins page
             },
           ),
           _buildFeatureListItem(
@@ -147,8 +138,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Sounds, soundscapes, sleep tracking",
             iconColor: featureIconColor,
             onTap: () {
-              print("Navigate to Relaxation & Sleep Aids");
-
+              // TODO: Add navigation to Relaxation & Sleep Aids page
             },
           ),
           _buildFeatureListItem(
@@ -158,8 +148,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Combine mental & physical health insights",
             iconColor: featureIconColor,
             onTap: () {
-              print("View Integrated Health Tracking");
-
+              // TODO: Add navigation to Integrated Health Tracking page
             },
           ),
           _buildFeatureListItem(
@@ -169,8 +158,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Positive affirmations, daily tips",
             iconColor: featureIconColor,
             onTap: () {
-              print("Configure Customizable Notifications");
-
+              // TODO: Add navigation to Customizable Notifications page
             },
           ),
           _buildFeatureListItem(
@@ -180,8 +168,7 @@ class MentalHealthSupportScreen extends StatelessWidget {
             subtitle: "Quick access for immediate support",
             iconColor: featureIconColor,
             onTap: () {
-              print("Access Emergency & Crisis Features");
-
+              // TODO: Add navigation to Emergency & Crisis Features page
             },
           ),
           const SizedBox(height: 20),
@@ -189,8 +176,4 @@ class MentalHealthSupportScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-extension on ThemeData {
-  get pink => null;
 }

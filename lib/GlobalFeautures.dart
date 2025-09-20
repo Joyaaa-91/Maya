@@ -1,9 +1,14 @@
+// GlobalFeaturesPage.dart
+
 import 'dart:async'; // Required for StreamSubscription
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:untitled/LoginPage.dart';
 import 'package:untitled/PregnancyGuideScreen.dart';
 import 'AnonymousCrimereporting.dart';
+import 'EmergencyCallPage.dart';
+import 'EmergencyOption.dart';
+import 'Fetalmovement.dart';
 import 'SafetytipScreen.dart';
 import 'SelfdefensetutorialScreen.dart';
 import 'ShakeFeaturePage.dart';
@@ -11,8 +16,9 @@ import 'AnonymousCrimeReportPage.dart';
 import 'ReportListPage.dart'; // New import for the reports page
 
 // New imports for the features you added
-import 'safety_tips_screen.dart';
-import 'self_defense_tutorial_screen.dart';
+import 'MentalHealthSupportScreen.dart';
+import 'ContractionTrackerPage.dart';
+import 'EmergencyOptionsPage.dart';
 
 // --- Theme Definitions ---
 class AppThemes {
@@ -75,7 +81,6 @@ class AppThemes {
       surface: Colors.white,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-
       onSurface: Colors.pinkAccent,
       error: Colors.red,
       onError: Colors.white,
@@ -122,11 +127,9 @@ class AppThemes {
     colorScheme: ColorScheme.dark(
       primary: Colors.deepPurple[400]!,
       secondary: Colors.purpleAccent,
-
       surface: Colors.grey[800]!,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-
       onSurface: Colors.white70,
       error: Colors.redAccent,
       onError: Colors.black,
@@ -204,7 +207,14 @@ List<FeatureItem> globalFeatures(BuildContext context) => [
   FeatureItem(
     icon: Icons.call_outlined,
     name: 'Emergency Call',
-    onTap: () => print('Emergency Call tapped'),
+    onTap: () {
+      // Navigate to the EmergencyCallPage
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const EmergencyCallPage()),
+      );
+      print('Emergency Call tapped');
+    },
   ),
   FeatureItem(
     icon: Icons.location_on_outlined,
@@ -269,17 +279,40 @@ List<FeatureItem> motherModeFeatures(BuildContext context) => [
   FeatureItem(
     icon: Icons.local_hospital_outlined,
     name: 'Maternity Emergency',
-    onTap: () => print('Maternity Emergency tapped'),
+    onTap: () { // ⬅️ UPDATED NAVIGATION
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const EmergencyOptionsPage(),
+        ),
+      );
+    },
   ),
   FeatureItem(
     icon: Icons.self_improvement_outlined,
     name: 'Mental Health',
-    onTap: () => print('Mental Health tapped'),
+    onTap: () {
+      // CORRECTED: Navigate to the MentalHealthSupportScreen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MentalHealthSupportScreen(),
+        ),
+      );
+    },
   ),
   FeatureItem(
     icon: Icons.track_changes_outlined,
     name: 'Fetal Movement & Contraction Tracker',
-    onTap: () => print('Tracker tapped'),
+    onTap: () {
+      // CORRECTED: Navigate to the ContractionTrackerPage
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const FetalMovementAndContractionTrackerPage(),
+        ),
+      );
+    },
   ),
 ];
 

@@ -127,4 +127,4 @@ class _ModeSelectionScreenState extends State<ModeSelectionScreen> {
 }
 
 // To use this screen:
-// void main() => runApp(MaterialApp(home: ModeSelectionScreen()));
+// void main() => runApp(MaterialApp(home: ModeSelectionScreen()

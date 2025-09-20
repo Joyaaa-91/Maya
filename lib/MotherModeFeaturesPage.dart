@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'Fetalmovement.dart' hide ContractionTrackerPage;
 import 'PregnancyGuideScreen.dart'; // Import the new file
+import 'MentalHealthSupportScreen.dart'; // Import the Mental Health Screen
+import 'ContractionTrackerPage.dart'; // Import the Contraction Tracker
 
 class MotherModeFeaturesPage extends StatefulWidget {
   const MotherModeFeaturesPage({super.key});
@@ -178,14 +180,24 @@ class _MotherModeFeaturesPageState extends State<MotherModeFeaturesPage> {
                           'Mental Health Support: 24/7 helpline and stress relief tips',
                           const Icon(Icons.favorite, color: Colors.pink),
                           onTap: () {
-                            // TODO: Add navigation or functionality for Mental Health Support
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MentalHealthSupportScreen(),
+                              ),
+                            );
                           },
                         ),
                         _buildFeatureCard(
                           'Fetal Movement & Contraction Tracker',
                           const Icon(Icons.track_changes, color: Colors.pink),
                           onTap: () {
-                            // TODO: Add navigation or functionality for the Tracker
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const FetalMovementAndContractionTrackerPage(),
+                              ),
+                            );
                           },
                         ),
                       ],
